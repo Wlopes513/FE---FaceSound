@@ -4,7 +4,6 @@ import {
 } from '@coreui/react';
 import { withTranslation } from 'react-i18next';
 import Header from '../../containers/defaultHeader';
-import LogoHome from '../../assets/imgs/logo-home.svg';
 
 class People extends Component {
     constructor(props) {
@@ -20,7 +19,7 @@ class People extends Component {
                 </CHeaderNav>
                 <div className="app-body">
                     <div className='container-centered'>
-                        <table class="table">
+                        <table className="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -43,8 +42,16 @@ class People extends Component {
                                     <td>2023-11-12 10:30:45</td>
                                     <td>2023-11-12 14:20:30</td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm">Editar</button>
-                                        <button class="btn btn-danger btn-sm">Excluir</button>
+                                        <button
+                                            className="btn btn-warning btn-sm"
+                                            type='button'
+                                            onClick={() => {
+                                                return alert("tesat");
+                                            }}
+                                        >
+                                            Editar
+                                        </button>
+                                        <button className="btn btn-danger btn-sm">Excluir</button>
                                     </td>
                                 </tr>
                             </tbody>
