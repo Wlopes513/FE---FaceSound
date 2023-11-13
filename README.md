@@ -13,7 +13,7 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de iniciar:
 
 ## Instalação
 
-1. Clone o repositório:asdas
+1. Clone o repositório:
 
 ```bash
 git clone https://github.com/Wlopes513/FE---FaceSound
