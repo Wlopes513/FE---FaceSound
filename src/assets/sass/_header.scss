@@ -1,0 +1,40 @@
+.header-nav {
+    width: 100% !important;
+    height: 50px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: fixed !important;
+    border-bottom: 1px solid #c8ced3 !important;
+
+    .app-header {
+        height: 50px !important;
+        display: flex !important;
+        align-self: center !important;
+
+        .container-fluid {
+            display: flex !important;
+            align-self: center !important;
+
+            .col {
+                display: flex !important;
+                align-items: center !important;
+
+                button {
+                    width: 50px !important;
+                    margin: 0 5px !important;
+                    padding: 0 !important;
+                    border: none !important;
+                    background-color: transparent !important;
+
+                    &:focus {
+                        box-shadow: none !important;
+                    }
+
+                    img {
+                        width: -webkit-fill-available !important;
+                    }
+                }
+            }
+        }
+    }
+}
