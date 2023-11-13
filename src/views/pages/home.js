@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {
   CHeaderNav,
 } from '@coreui/react';
-import { Container } from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import Header from '../../containers/defaultHeader';
+import LogoHome from '../../assets/imgs/logo-home.svg';
 
 class Home extends Component {
   constructor(props) {
@@ -13,19 +13,15 @@ class Home extends Component {
   }
 
   render() {
-    const { t } = this.props;
-
     return (
       <div className="app">
         <CHeaderNav>
           <Header className="header" />
         </CHeaderNav>
         <div className="app-body">
-          <Container>
-            <h1 className="title">
-              {t('Home.TITLE')}
-            </h1>
-          </Container>
+          <div className='container-centered'>
+            <img src={LogoHome} alt="Logo Home" />
+          </div>
         </div>
       </div>
     )

@@ -1,38 +1,36 @@
 .header-nav {
-    width: 100% !important;
-    height: 50px !important;
+    width: 60% !important;
+    height: 100px !important;
     margin: 0 !important;
     padding: 0 !important;
     position: fixed !important;
-    border-bottom: 1px solid #c8ced3 !important;
+    top: 13% !important;
+    left: 20% !important;
+    border-radius: 20px !important;
 
     .app-header {
-        height: 50px !important;
+        height: 100px !important;
         display: flex !important;
         align-self: center !important;
+        border-radius: 20px !important;
 
         .container-fluid {
             display: flex !important;
             align-self: center !important;
 
-            .col {
+            .col, .col-2 {
                 display: flex !important;
                 align-items: center !important;
 
+                .header-brand {
+                    font-size: 25px !important;
+                    font-weight: 900 !important;
+                    color: #030FFE !important;
+                }
+
                 button {
-                    width: 50px !important;
-                    margin: 0 5px !important;
-                    padding: 0 !important;
-                    border: none !important;
-                    background-color: transparent !important;
-
-                    &:focus {
-                        box-shadow: none !important;
-                    }
-
-                    img {
-                        width: -webkit-fill-available !important;
-                    }
+                    font-size: 20px !important;
+                    height: 51px !important;
                 }
             }
         }

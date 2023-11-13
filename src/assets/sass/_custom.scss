@@ -1,14 +1,21 @@
 input {
     background: #ffffff !important;
-    border: 1px solid #000000 !important;
-    border-radius: 10px !important;
+    border: 3px solid #030FFEF7 !important;
+    border-radius: 15px !important;
     color: #000000 !important;
 }
 
-.btn_web_primary {
-    background: #701078 !important;
+.btn-primary {
+    background: #030FFE !important;
     color: #ffffff !important;
-    border-color: #701078 !important;
+    border: 3px solid #030FFE !important;
+    border-radius: 10px !important;
+}
+
+.btn-secondary {
+    background: #ffffff !important;
+    color: #030FFE !important;
+    border: 3px solid #030FFE !important;
     border-radius: 10px !important;
 }
 

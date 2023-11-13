@@ -1,13 +1,27 @@
 .app {
-    background-color: #ffffff !important;
+    background-color: #030FFE !important;
     height: 100vh !important;
 
     .app-body {
         margin-top: 51px !important;
         padding-top: 15px !important;
-        
-        .title {
-            text-align: center !important;
+        align-items: center !important;
+
+        .container-centered {
+            width: 100% !important;
+            height: 75% !important;
+            background-image: url("../imgs/background-home.svg") !important;
+            background-position: 10px !important;
+            background-size: cover !important;
+            background-repeat: no-repeat !important;
+            background-color: #ffffff !important;
+            margin: 0 !important;
+            display: flex !important;
+            justify-content: center !important;
+
+            img {
+                width: 50% !important;
+            }
         }
     }
 }

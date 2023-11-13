@@ -23,25 +23,24 @@ class DefaultHeader extends Component {
         return (
             <div className='app-header'>
                 <CContainer fluid>
-                    <Col>
-                        <CHeaderBrand href="#">Header</CHeaderBrand>
+                    <Col className='justify-content-center'>
+                        <CHeaderBrand href="#">Home Page</CHeaderBrand>
+                    </Col>
+                    <Col className='justify-content-center'>
+                        <CHeaderBrand href="#">Pessoa</CHeaderBrand>
+                    </Col>
+                    <Col className='justify-content-center'>
+                        <CHeaderBrand href="#">Usuários</CHeaderBrand>
                     </Col>
                     <Col className='justify-content-end'>
                         <Button
                             type='button'
-                            id='ChangeLanguagePtBR'
-                            name='ChangeLanguagePtBR'
-                            onClick={(e) => this.handleChangeLanguage(e, 'pt-BR')}
-                        >
-                            <img src="https://www.gov.br/planalto/pt-br/conheca-a-presidencia/acervo/simbolos-nacionais/bandeira/bandeiragrande.jpg" alt="Bandeira do Brasil" />
-                        </Button>
-                        <Button
-                            type='button'
-                            id='ChangeLanguageEn'
-                            name='ChangeLanguageEn'
+                            id='ButtonLogout'
+                            name='ButtonLogout'
+                            color="primary"
                             onClick={(e) => this.handleChangeLanguage(e, 'en')}
                         >
-                            <img src="https://static.mundoeducacao.uol.com.br/mundoeducacao/2022/05/bandeira-estados-unidos.jpg" alt="Bandeira dos Estados Unidos" />
+                            Logout
                         </Button>
                     </Col>
                 </CContainer>

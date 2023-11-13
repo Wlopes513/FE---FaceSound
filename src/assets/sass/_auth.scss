@@ -1,16 +1,61 @@
 .app-auth {
     width: 100vw !important;
     height: 100vh !important;
-    background-color: #f4f4f4 !important;
     flex-direction: column !important;
     display: flex !important;
+    background-image: url("../imgs/background.svg") !important;
 
     h1 {
-        font-size: 4rem !important;
-        color: #4d65ab !important;
+        font-size: 3rem !important;
+        font-weight: 800 !important;
+        color: #ffffff !important;
     }
 
-    .row {
-        justify-content: center !important;
+    h3 {
+        font-size: 2.5rem !important;
+        font-weight: 800 !important;
+        color: #6B6B6B !important;
+        margin-bottom: 15px !important;
+    }
+
+    input {
+        font-size: 1.25rem !important;
+        height: 50px !important;
+
+        &::placeholder {
+            font-weight: 800 !important;
+            color: #6B6B6B !important;
+        }
+    }
+
+    form {
+        width: 80% !important;
+        height: 75% !important;
+        display: flex !important;
+
+        .container-form {
+            width: 100% !important;
+            justify-content: center !important;
+            background-color: #030FFE !important;
+            border-radius: 15px !important;
+
+            img {
+                width: 50% !important;
+            }
+
+            .row {
+                justify-content: center !important;
+            }
+
+            .col-3 {
+                height: 100%;
+                background-color: #ffffff !important;
+                border-radius: 15px !important;
+                padding: 0 2% !important;
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+            }
+        }
     }
 }
