@@ -1,7 +1,5 @@
 # FaceSoundId
 
-![FaceSoundId Logo]
-
 ## Descrição
 
 O FaceSoundId é um projeto React que combina reconhecimento facial e identificação de som para criar uma experiência única de autenticação. Ele utiliza tecnologias avançadas de visão computacional e processamento de áudio para oferecer um método seguro e inovador de acesso a sistemas.
