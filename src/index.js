@@ -12,6 +12,7 @@ import Login from './views/pages/login';
 import Dashboard from './views/pages/dashboard';
 
 import './assets/sass/index.scss';
+import People from './views/pages/people';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,6 +23,7 @@ root.render(
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/people" element={<People />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

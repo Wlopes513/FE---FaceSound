@@ -27,7 +27,7 @@ class DefaultHeader extends Component {
                         <CHeaderBrand href="#">Home Page</CHeaderBrand>
                     </Col>
                     <Col className='justify-content-center'>
-                        <CHeaderBrand href="#">Pessoa</CHeaderBrand>
+                        <CHeaderBrand href="/people">Pessoa</CHeaderBrand>
                     </Col>
                     <Col className='justify-content-center'>
                         <CHeaderBrand href="#">Usuários</CHeaderBrand>
