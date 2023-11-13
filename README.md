@@ -17,4 +17,3 @@ Certifique-se de ter as seguintes ferramentas instaladas antes de iniciar:
 
 ```bash
 git clone https://github.com/Wlopes513/FE---FaceSound
-assdassad
