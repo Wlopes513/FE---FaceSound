@@ -45,13 +45,14 @@ class People extends Component {
                                         <button
                                             className="btn btn-warning btn-sm"
                                             type='button'
-                                            onClick={() => {
-                                                return alert("tesat");
-                                            }}
-                                        >
+                                            onClick={() => alert('teste')}>
                                             Editar
                                         </button>
-                                        <button className="btn btn-danger btn-sm">Excluir</button>
+                                        <button 
+                                            className="btn btn-danger btn-sm" 
+                                            onClick={() => alert('teste')}>
+                                            Excluir
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
