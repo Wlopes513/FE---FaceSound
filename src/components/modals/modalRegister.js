@@ -5,18 +5,24 @@ import { Button, Col, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, Mo
 class ModalRegister extends Component {
     constructor(props) {
         super(props)
-        this.state = { Name: "" };
+        this.state = { Address: "", Name: "" };
     }
 
-    render(args) {
-        const { Name } = this.state;
+    render() {
+        const { Address, Name } = this.state;
         const { isOpen, toggle } = this.props;
 
         return (
-            <Modal isOpen={isOpen} toggle={toggle} {...args}>
-                <ModalHeader toggle={toggle}>Informe os dados do Visitante</ModalHeader>
+            <Modal isOpen={isOpen} toggle={toggle}>
+                <ModalHeader toggle={toggle}>Informe os dados do usuário</ModalHeader>
                 <ModalBody>
                     <Row>
+                        <Col>
+                            <FormGroup floating>
+                                <Input value={Name} required={true} onChange={(e) => this.setState({ Name: e.target.value })} placeholder="Nome" id="Name" />
+                                <Label for="Name">Nome</Label>
+                            </FormGroup>
+                        </Col>
                         <Col>
                             <FormGroup floating>
                                 <Input value={Name} required={true} onChange={(e) => this.setState({ Name: e.target.value })} placeholder="Nome" id="Name" />
@@ -26,10 +32,10 @@ class ModalRegister extends Component {
                     </Row>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="success" onClick={() => { }}>
+                    <Button color="primary" onClick={() => { }}>
                         Cadastrar
                     </Button>{' '}
-                    <Button color="danger" onClick={toggle}>
+                    <Button color="secondary" onClick={toggle}>
                         Cancelar
                     </Button>
                 </ModalFooter>
