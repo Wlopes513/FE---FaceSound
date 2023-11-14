@@ -13,6 +13,7 @@ import Dashboard from './views/pages/dashboard';
 
 import './assets/sass/index.scss';
 import People from './views/pages/people';
+import User from './views/pages/user';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -23,7 +24,9 @@ root.render(
           <Route exact path="/dashboard" element={<Dashboard />} />
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/home" element={<Home />} />
           <Route exact path="/people" element={<People />} />
+          <Route exact path="/user" element={<User />} />
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>

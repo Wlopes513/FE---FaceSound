@@ -24,13 +24,13 @@ class DefaultHeader extends Component {
             <div className='app-header'>
                 <CContainer fluid>
                     <Col className='justify-content-center'>
-                        <CHeaderBrand href="#">Home Page</CHeaderBrand>
+                        <CHeaderBrand href="/home">Home Page</CHeaderBrand>
                     </Col>
                     <Col className='justify-content-center'>
                         <CHeaderBrand href="/people">Pessoa</CHeaderBrand>
                     </Col>
                     <Col className='justify-content-center'>
-                        <CHeaderBrand href="#">Usuários</CHeaderBrand>
+                        <CHeaderBrand href="/user">Usuários</CHeaderBrand>
                     </Col>
                     <Col className='justify-content-end'>
                         <Button
