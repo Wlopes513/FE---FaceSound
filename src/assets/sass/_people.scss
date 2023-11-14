@@ -1,27 +1,32 @@
 .app {
-    .table-content {
-        background-color: white;
-        border-radius: 20px !important;
+    .card {
         width: 60%;
         height: 80%;
         margin-top: 4%;
-    }
-    th {
-        color: #030FFE !important;
-        padding: 20px;
-        text-align: center;
-        font-size: 15px;
-    }
-    td {
-        color: #A0A4F1 !important;
-        padding: 10px;
-        text-align: center;
-        font-size: 14px;
-    }
-    .btn-visual {
         background-color: white;
-        border-color: #A0A4F1;
-        border-radius: 20px !important;
-        color: #A0A4F1 !important;
+        border-radius: 10px !important;
+    }
+
+    table {
+        th {
+            font-size: 15px;
+            padding: 20px;
+            text-align: center;
+            color: #030FFE !important;
+        }
+
+        td {
+            font-size: 14px;
+            padding: 10px;
+            color: #A0A4F1 !important;
+            text-align: center;
+        }
+
+        .btn-visual {
+            border-radius: 20px !important;
+            border-color: #A0A4F1;
+            background-color: white;
+            color: #A0A4F1 !important;
+        }
     }
 }
