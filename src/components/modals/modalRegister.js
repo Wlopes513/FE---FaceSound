@@ -8,12 +8,12 @@ class ModalRegister extends Component {
         this.state = { Address: "" };
     }
 
-    render(args) {
+    render() {
         const { Address } = this.state;
         const { isOpen, toggle } = this.props;
 
         return (
-            <Modal isOpen={isOpen} toggle={toggle} {...args}>
+            <Modal isOpen={isOpen} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Informe os dados do usuário</ModalHeader>
                 <ModalBody>
                     <Row>
