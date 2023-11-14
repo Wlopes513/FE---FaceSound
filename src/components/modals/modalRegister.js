@@ -5,11 +5,11 @@ import { Button, Col, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, Mo
 class ModalRegister extends Component {
     constructor(props) {
         super(props)
-        this.state = { Address: "" };
+        this.state = { Address: "", Name: "" };
     }
 
     render() {
-        const { Address } = this.state;
+        const { Address, Name } = this.state;
         const { isOpen, toggle } = this.props;
 
         return (
@@ -21,6 +21,12 @@ class ModalRegister extends Component {
                             <FormGroup floating>
                                 <Input value={Address} required={true} onChange={(e) => this.setState({ Address: e.target.value })} placeholder="Endereço" id="Address" />
                                 <Label for="Address">Endereço</Label>
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup floating>
+                                <Input value={Name} required={true} onChange={(e) => this.setState({ Name: e.target.value })} placeholder="Nome" id="Name" />
+                                <Label for="Name">Nome</Label>
                             </FormGroup>
                         </Col>
                     </Row>
