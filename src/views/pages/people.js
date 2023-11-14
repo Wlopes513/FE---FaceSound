@@ -45,19 +45,19 @@ class People extends Component {
                                         <td>1</td>
                                         <td>John Doe</td>
                                         <td>123.456.789-01</td>
-                                        <td>(123) 456-7890</td>
-                                        <td>3</td>
-                                        <td>2023-11-12 10:30:45</td>
-                                        <td>2023-11-12 14:20:30</td>
+                                        <td>(11) 91234-7890</td>
+                                        <td>3°</td>
+                                        <td>2023/11/12</td>
+                                        <td>2023/11/12</td>
                                         <td>
                                             <button
-                                                className="btn btn-warning btn-sm"
+                                                className="btn btn-warning btn-sm btn-visual"
                                                 type='button'
                                                 onClick={this.handleTest}>
                                                 Editar
                                             </button>
                                             <button
-                                                className="btn btn-danger btn-sm"
+                                                className="btn btn-danger btn-sm btn-visual"
                                                 type='button'
                                                 onClick={this.handleTest}>
                                                 Excluir
