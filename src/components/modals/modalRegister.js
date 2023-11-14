@@ -26,10 +26,10 @@ class ModalRegister extends Component {
                     </Row>
                 </ModalBody>
                 <ModalFooter>
-                    <Button color="success" onClick={() => { }}>
+                    <Button color="primary" onClick={() => { }}>
                         Cadastrar
                     </Button>{' '}
-                    <Button color="danger" onClick={toggle}>
+                    <Button color="secondary" onClick={toggle}>
                         Cancelar
                     </Button>
                 </ModalFooter>
