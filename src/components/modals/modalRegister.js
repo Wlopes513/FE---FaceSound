@@ -5,22 +5,22 @@ import { Button, Col, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, Mo
 class ModalRegister extends Component {
     constructor(props) {
         super(props)
-        this.state = { Address: "" };
+        this.state = { Name: "" };
     }
 
     render(args) {
-        const { Address } = this.state;
+        const { Name } = this.state;
         const { isOpen, toggle } = this.props;
 
         return (
             <Modal isOpen={isOpen} toggle={toggle} {...args}>
-                <ModalHeader toggle={toggle}>Informe os dados do usuário</ModalHeader>
+                <ModalHeader toggle={toggle}>Informe os dados do Visitante</ModalHeader>
                 <ModalBody>
                     <Row>
                         <Col>
                             <FormGroup floating>
-                                <Input value={Address} required={true} onChange={(e) => this.setState({ Address: e.target.value })} placeholder="Endereço" id="Address" />
-                                <Label for="Address">Endereço</Label>
+                                <Input value={Name} required={true} onChange={(e) => this.setState({ Name: e.target.value })} placeholder="Nome" id="Name" />
+                                <Label for="Name">Nome</Label>
                             </FormGroup>
                         </Col>
                     </Row>
