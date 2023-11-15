@@ -38,7 +38,7 @@ class ModalRegister extends Component {
                         <Col>
                             <FormGroup floating>
                                 <Input value={Andar} required={true} onChange={(e) => this.setState({ Andar: e.target.value })} placeholder="Andar" id="Andar" />
-                                <Label for="Andar°">Andar</Label>
+                                <Label for="Andar°">Andar</Label> 
                             </FormGroup>
                         </Col>
                     </Row>
