@@ -5,11 +5,11 @@ import { Button, Col, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, Mo
 class ModalRegisterUser extends Component {
     constructor(props) {
         super(props)
-        this.state = { Name: "", CPF: "", Telefone: "", Andar: "" };
+        this.state = { Name: "", Email: "", Admin: "" };
     }
 
     render() {
-        const { CPF, Name, Telefone, Andar } = this.state;
+        const { Email, Name, Admin } = this.state;
         const { isOpen, toggle } = this.props;
 
         return (
@@ -27,24 +27,16 @@ class ModalRegisterUser extends Component {
                     <Row>
                         <Col>
                             <FormGroup floating>
-                                <Input value={CPF} required={true} onChange={(e) => this.setState({ CPF: e.target.value })} placeholder="CPF" id="CPF" />
-                                <Label for="CPF">CPF</Label>
+                                <Input value={Email} required={true} onChange={(e) => this.setState({ Email: e.target.value })} placeholder="Email" id="Email" />
+                                <Label for="Email">Email</Label>
                             </FormGroup>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
                             <FormGroup floating>
-                                <Input value={Andar} required={true} onChange={(e) => this.setState({ Andar: e.target.value })} placeholder="Andar" id="Andar" />
-                                <Label for="Andar°">Andar</Label>
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <FormGroup floating>
-                                <Input value={Telefone} required={true} onChange={(e) => this.setState({ Telefone: e.target.value })} placeholder="Telefone" id="Telefone" />
-                                <Label for="Telefone">Telefone</Label>
+                                <Input value={Admin} required={true} onChange={(e) => this.setState({ Admin: e.target.value })} placeholder="Admin" id="Admin" />
+                                <Label for="Admin">Admin</Label>
                             </FormGroup>
                         </Col>
                     </Row>
