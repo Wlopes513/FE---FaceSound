@@ -11,7 +11,7 @@ class User extends Component {
     constructor(props) {
         super(props)
         this.state = { Width: window.innerWidth };
-        this.handleTest = this.handleTest.bind(this);
+        this.handleModal = this.handleModal.bind(this);
     }
 
     handleModal(event) {
