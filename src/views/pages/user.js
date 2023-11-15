@@ -5,7 +5,7 @@ import {
 import { withTranslation } from 'react-i18next';
 import { Button, Card, CardBody, Col, Row } from 'reactstrap';
 import Header from '../../containers/defaultHeader';
-//import { ModalRegisterComponent } from '../../components/modals';
+import { ModalRegisterUserComponent } from '../../components/modals';
 
 class User extends Component {
     constructor(props) {

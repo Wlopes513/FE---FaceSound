@@ -1,5 +1,6 @@
 import ModalRegisterComponent from "./modalRegister";
+import ModalRegisterUserComponent from "./modalRegisterUser";
 
 export {
-    ModalRegisterComponent,
+    ModalRegisterComponent, ModalRegisterUserComponent,
 }
