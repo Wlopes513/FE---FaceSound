@@ -62,4 +62,4 @@ class ModalRegisterUser extends Component {
     }
 }
 
-export default withTranslation()(ModalRegister);
+export default withTranslation()(ModalRegisterUser);

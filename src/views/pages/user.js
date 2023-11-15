@@ -23,8 +23,10 @@ class User extends Component {
     }
 
     render() {
+        const { IsOpen } = this.state;
         return (
             <div className="app">
+                <ModalRegisterUserComponent isOpen={IsOpen} />
                 <CHeaderNav>
                     <Header className="header" />
                 </CHeaderNav>
