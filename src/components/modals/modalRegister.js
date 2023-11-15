@@ -5,16 +5,16 @@ import { Button, Col, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, Mo
 class ModalRegister extends Component {
     constructor(props) {
         super(props)
-        this.state = { Address: "", Name: "" };
+        this.state = { Name: "", CPF: "", Telefone: ""};
     }
 
     render() {
-        const { Address, Name } = this.state;
+        const { CPF, Name, Telefone} = this.state;
         const { isOpen, toggle } = this.props;
 
         return (
             <Modal isOpen={isOpen} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Informe os dados do usuário</ModalHeader>
+                <ModalHeader toggle={toggle}>Informe os dados do Visitante</ModalHeader>
                 <ModalBody>
                     <Row>
                         <Col>
@@ -25,8 +25,14 @@ class ModalRegister extends Component {
                         </Col>
                         <Col>
                             <FormGroup floating>
-                                <Input value={Name} required={true} onChange={(e) => this.setState({ Name: e.target.value })} placeholder="Nome" id="Name" />
-                                <Label for="Name">Nome</Label>
+                                <Input value={CPF} required={true} onChange={(e) => this.setState({ CPF: e.target.value })} placeholder="CPF" id="CPF" />
+                                <Label for="CPF">CPF</Label>
+                            </FormGroup>
+                        </Col>
+                        <Col>
+                            <FormGroup floating>
+                                <Input value={Telefone} required={true} onChange={(e) => this.setState({ Telefone: e.target.value })} placeholder="Telefone" id="Telefone" />
+                                <Label for="Telefone">Telefone</Label>
                             </FormGroup>
                         </Col>
                     </Row>
