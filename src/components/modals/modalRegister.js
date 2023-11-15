@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Button, Col, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
+import ImageUpload from './ImageUpload';
 
 class ModalRegister extends Component {
     constructor(props) {
@@ -48,6 +49,7 @@ class ModalRegister extends Component {
                             </FormGroup>
                         </Col>
                     </Row>
+                    <ImageUpload />
                 </ModalBody>
                 <ModalFooter>
                     <Button color="primary" onClick={() => { }}>
@@ -58,7 +60,7 @@ class ModalRegister extends Component {
                     </Button>
                 </ModalFooter>
             </Modal>
-        )
+        );
     }
 }
 
