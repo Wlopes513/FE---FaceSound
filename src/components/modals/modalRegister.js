@@ -6,12 +6,12 @@ import ImageUpload from './imageUpload';
 class ModalRegister extends Component {
     constructor(props) {
         super(props)
-        this.state = { Name: "", CPF: "", Telefone: "", Andar: "" };
+        this.state = { Name: "", CPF: "", Phone: "", Floor: "" };
         this.handleRegister = this.handleRegister.bind(this);
     }
 
     async handleRegister() {
-        const { Name, CPF, Telefone, Andar } = this.state;
+        const { Name, CPF, Phone, Floor } = this.state;
         const { toggle } = this.props;
 
         try {
@@ -23,8 +23,8 @@ class ModalRegister extends Component {
                 body: JSON.stringify({
                     name: Name,
                     cpf: CPF,
-                    phone: Telefone,
-                    floor: Andar
+                    phone: Phone,
+                    floor: Floor
                 }),
             });
 
@@ -40,7 +40,7 @@ class ModalRegister extends Component {
     };
 
     render() {
-        const { CPF, Name, Telefone, Andar } = this.state;
+        const { CPF, Name, Phone, Floor } = this.state;
         const { isOpen, toggle } = this.props;
 
         return (
@@ -66,16 +66,16 @@ class ModalRegister extends Component {
                     <Row>
                         <Col>
                             <FormGroup floating>
-                                <Input value={Andar} required={true} onChange={(e) => this.setState({ Andar: e.target.value })} placeholder="Andar" id="Andar" />
-                                <Label for="Andar°">Andar</Label>
+                                <Input value={Floor} required={true} onChange={(e) => this.setState({ Floor: e.target.value })} placeholder="Floor" id="Floor" />
+                                <Label for="Floor">Andar°</Label>
                             </FormGroup>
                         </Col>
                     </Row>
                     <Row>
                         <Col>
                             <FormGroup floating>
-                                <Input value={Telefone} required={true} onChange={(e) => this.setState({ Telefone: e.target.value })} placeholder="Telefone" id="Telefone" />
-                                <Label for="Telefone">Telefone</Label>
+                                <Input value={Phone} required={true} onChange={(e) => this.setState({ Phone: e.target.value })} placeholder="Phone" id="Phone" />
+                                <Label for="Phone">Telefone</Label>
                             </FormGroup>
                         </Col>
                     </Row>
