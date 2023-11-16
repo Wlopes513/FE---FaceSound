@@ -7,9 +7,10 @@ class ModalRegister extends Component {
     constructor(props) {
         super(props)
         this.state = { Name: "", CPF: "", Telefone: "", Andar: "" };
+        this.handleRegister = this.handleRegister.bind(this);
     }
 
-    handleRegister = async () => {
+    async handleRegister() {
         const { Name, CPF, Telefone, Andar } = this.state;
         const { toggle } = this.props;
 
@@ -20,10 +21,10 @@ class ModalRegister extends Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    name:Name,
-                    cpf:CPF,
-                    phone:Telefone,
-                    floor:Andar
+                    name: Name,
+                    cpf: CPF,
+                    phone: Telefone,
+                    floor: Andar
                 }),
             });
 
