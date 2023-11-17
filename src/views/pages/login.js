@@ -33,10 +33,11 @@ class Login extends Component {
         throw new Error(`Erro na requisição: ${response.status}`);
       }
 
+      // Meu duo se vc ta vendo isso tem q ver o q vai vir dentro do response e passar ali no localset pra gente ter o token nas outras telas
       console.log("tesataest");
       console.log(response);
 
-      toast.success("Cadastro bem-sucedido!");
+      toast.success("Login bem-sucedido!");
       localSet("isLogged", {}, 15);
     } catch (error) {
       toast.error(error.message);
