@@ -54,7 +54,7 @@ class People extends Component {
                 <CHeaderNav>
                     <Header className="header" />
                 </CHeaderNav>
-                <div className="app-body">
+                <div className="app-body app-people">
                     <div className='container-centered'>
                         <Card>
                             <CardBody>
