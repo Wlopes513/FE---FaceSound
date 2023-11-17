@@ -17,7 +17,6 @@ class User extends Component {
         this.fetchUserData = this.fetchUserData.bind(this);
     }
     componentDidMount() {
-        console.log('âddssajbsdha')
         this.fetchUserData();
     }
 

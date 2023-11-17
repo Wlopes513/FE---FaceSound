@@ -19,7 +19,7 @@ class Login extends Component {
     const { Email, Password } = this.state;
 
     try {
-      const response = await fetch('http://api.facesoundid.tech/api/v1/users/login', {
+      await fetch('http://api.facesoundid.tech/api/v1/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -44,9 +44,6 @@ class Login extends Component {
           console.error('Houve um problema com a sua requisição fetch:', error);
           toast.error("Credenciais inválidas!");
         });
-
-      console.log(response);
-
     } catch (error) {
       toast.error(error.message);
     }
