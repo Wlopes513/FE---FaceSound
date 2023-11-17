@@ -4,19 +4,20 @@ import {
     CContainer, CHeaderBrand
 } from '@coreui/react';
 import { Col, Button } from 'reactstrap';
+import { localRemove } from '../utils/session';
 
 class DefaultHeader extends Component {
     constructor(props) {
         super(props)
-        this.handleChangeLanguage = this.handleChangeLanguage.bind(this);
+        this.handleLogout = this.handleLogout.bind(this);
     }
 
-    handleChangeLanguage(event, language) {
+    handleLogout(event) {
         event.preventDefault();
 
-        const { i18n } = this.props;
+        localRemove("isLogged");
 
-        i18n.changeLanguage(language)
+        window.open("/login", "_self");
     }
 
     render() {
@@ -38,7 +39,7 @@ class DefaultHeader extends Component {
                             id='ButtonLogout'
                             name='ButtonLogout'
                             color="primary"
-                            onClick={(e) => this.handleChangeLanguage(e, 'en')}
+                            onClick={this.handleLogout}
                         >
                             Logout
                         </Button>

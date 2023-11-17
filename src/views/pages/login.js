@@ -10,6 +10,7 @@ class Login extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = { Width: window.innerWidth, Email: '', Password: '', loggedIn: false };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   async handleSubmit(event) {
@@ -21,7 +22,7 @@ class Login extends Component {
       const response = await fetch('http://api.facesoundid.tech/api/v1/users/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'   
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           email: Email,
@@ -37,14 +38,15 @@ class Login extends Component {
         .then(data => {
           localSet("isLogged", data.jwt_token, 15);
           this.setState({ loggedIn: true });
+          toast.success("Login bem-sucedido!");
         })
         .catch(error => {
           console.error('Houve um problema com a sua requisição fetch:', error);
+          toast.error("Credenciais inválidas!");
         });
 
       console.log(response);
-      
-      toast.success("Login bem-sucedido!");
+
     } catch (error) {
       toast.error(error.message);
     }
@@ -60,7 +62,7 @@ class Login extends Component {
     return (
       <div className="app-auth">
         <Container className='flex-fill d-flex flex-column justify-content-center'>
-          <Form className='align-self-center'>
+          <Form className='align-self-center' onSubmit={this.handleSubmit}>
             <Row className='container-form'>
               <Col xs="9">
                 <div className='h-100 d-flex justify-content-center align-self-center'>
@@ -74,21 +76,21 @@ class Login extends Component {
                 <Row>
                   <Col>
                     <FormGroup>
-                      <Input id="EmailInput" name="EmailInput" type="email" placeholder="Usuário ou email" value={Email} onChange={(e) => this.setState({ Email: e.target.value })} />
+                      <Input id="EmailInput" name="EmailInput" type="email" placeholder="Usuário ou email" required value={Email} onChange={(e) => this.setState({ Email: e.target.value })} />
                     </FormGroup>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
                     <FormGroup>
-                      <Input id="PasswordInput" name="PasswordInput" type="password" placeholder="Senha" onChange={(e) => this.setState({ Password: e.target.value })} />
+                      <Input id="PasswordInput" name="PasswordInput" type="password" placeholder="Senha" required onChange={(e) => this.setState({ Password: e.target.value })} />
                     </FormGroup>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
                     <FormGroup>
-                      <Button color='primary' className='w-100' onClick={this.handleSubmit.bind(this)}>
+                      <Button color='primary' className='w-100' type='submit'>
                         ENTRAR
                       </Button>
                     </FormGroup>
