@@ -15,8 +15,16 @@ import People from './views/pages/people';
 import User from './views/pages/user';
 
 import './assets/sass/index.scss';
+import { localGet } from './utils/session';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+const alreadyLogged = localGet("isLogged");
+
+if (!alreadyLogged && window.location.pathname !== "/login") {
+    window.open("/login", "_self");
+}
+
 root.render(
   <I18nextProvider i18n={i18n}>
     <ToastContainer theme="dark" />
