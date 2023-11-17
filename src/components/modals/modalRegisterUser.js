@@ -13,7 +13,7 @@ class ModalRegisterUser extends Component {
         const { toggle } = this.props;
 
         try {
-            const response = await fetch('http://api.facesoundid.tech/api/v1/users', {
+            const response = await fetch('http://api.facesoundid.tech/api/v1/users/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
