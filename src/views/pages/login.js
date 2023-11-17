@@ -4,11 +4,12 @@ import { withTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import Logo from '../../assets/imgs/logo.svg';
 import { localSet } from '../../utils/session';
+import { Navigate } from 'react-router-dom';
 
 class Login extends Component {
   constructor(props, context) {
     super(props, context)
-    this.state = { Width: window.innerWidth, Email: '', Password: '' };
+    this.state = { Width: window.innerWidth, Email: '', Password: '', loggedIn: false };
   }
 
   async handleSubmit(event) {
@@ -35,6 +36,7 @@ class Login extends Component {
         })
         .then(data => {
           localSet("isLogged", data.jwt_token, 15);
+          this.setState({ loggedIn: true });
         })
         .catch(error => {
           console.error('Houve um problema com a sua requisição fetch:', error);
@@ -49,7 +51,11 @@ class Login extends Component {
   }
 
   render() {
-    const { Email } = this.state;
+    const { Email, loggedIn } = this.state;
+
+    if (loggedIn) {
+      return <Navigate to="/home" />;
+    }
 
     return (
       <div className="app-auth">
