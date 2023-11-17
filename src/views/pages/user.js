@@ -6,12 +6,25 @@ import { withTranslation } from 'react-i18next';
 import { Button, Card, CardBody, Col, Row } from 'reactstrap';
 import Header from '../../containers/defaultHeader';
 import { ModalRegisterUserComponent } from '../../components/modals';
+import { format } from 'date-fns';
 
 class User extends Component {
     constructor(props) {
         super(props)
-        this.state = { Width: window.innerWidth };
+        this.state = { Width: window.innerWidth, userData: [], IsOpen: false };
         this.handleModal = this.handleModal.bind(this);
+    }
+    componentDidMount() {
+        this.fetchUserData();
+    }
+
+    fetchUserData() {
+        fetch('http://api.facesoundid.tech/api/v1/users/')
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ userData: data });
+            })
+            .catch(error => console.error('Erro ao obter dados:', error));
     }
 
     handleModal(event) {
@@ -23,7 +36,7 @@ class User extends Component {
     }
 
     render() {
-        const { IsOpen } = this.state;
+        const { IsOpen, userData } = this.state;
         return (
             <div className="app">
                 {IsOpen && (
@@ -54,28 +67,36 @@ class User extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>John Doe</td>
-                                            <td>teste@gmail.com</td>
-                                            <td>Jonas</td>
-                                            <td>2023/11/12</td>
-                                            <td>2023/11/12</td>
-                                            <td>
-                                                <button
-                                                    className="btn btn-warning btn-sm btn-visual"
-                                                    type='button'
-                                                    onClick={this.handleTest}>
-                                                    Editar
-                                                </button>
-                                                <button
-                                                    className="btn btn-danger btn-sm btn-visual"
-                                                    type='button'
-                                                    onClick={this.handleTest}>
-                                                    Excluir
-                                                </button>
-                                            </td>
-                                        </tr>
+                                        {Array.isArray(userData) && userData.length > 0 ? (
+                                            userData.map(user => (
+                                                <tr key={user.id}>
+                                                    <td>{user.id}</td>
+                                                    <td>{user.name}</td>
+                                                    <td>{user.email}</td>
+                                                    <td>{user.admin}</td>
+                                                    <td>{format(new Date(user.created_at), 'dd/MM/yyyy')}</td>
+                                                    <td>{format(new Date(user.updated_at), 'dd/MM/yyyy')}</td>
+                                                    <td>
+                                                        <button
+                                                            className="btn btn-warning btn-sm btn-visual"
+                                                            type='button'
+                                                            onClick={this.handleTest}>
+                                                            Editar
+                                                        </button>
+                                                        <button
+                                                            className="btn btn-danger btn-sm btn-visual"
+                                                            type='button'
+                                                            onClick={this.handleTest}>
+                                                            Excluir
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="7">Sem dados disponíveis</td>
+                                            </tr>
+                                        )}
                                     </tbody>
                                 </table>
                             </CardBody>

@@ -17,28 +17,32 @@ class Login extends Component {
     const { Email, Password } = this.state;
 
     try {
-      const response = await fetch('http://api.facesoundid.tech/api/v1/persons/', {
+      const response = await fetch('http://api.facesoundid.tech/api/v1/users/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
-          'api-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDAyNjM0NDQsImlhdCI6MTcwMDE3NzA0NCwic3ViIjoiMDIzNzI4ZjUtNTFiYS00YjlkLTg0MGEtMzFjNGVmMzMxNWRjIn0.vgkBsneSk3FjOHyFcOebQl4o3H-2Un2kobTE-poBmYc'
+          'Content-Type': 'application/json'   
         },
         body: JSON.stringify({
           email: Email,
           password: Password,
         }),
-      });
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          localSet("isLogged", data.jwt_token, 15);
+        })
+        .catch(error => {
+          console.error('Houve um problema com a sua requisição fetch:', error);
+        });
 
-      if (!response.ok) {
-        throw new Error(`Erro na requisição: ${response.status}`);
-      }
-
-      // Meu duo se vc ta vendo isso tem q ver o q vai vir dentro do response e passar ali no localset pra gente ter o token nas outras telas
-      console.log("tesataest");
       console.log(response);
-
+      
       toast.success("Login bem-sucedido!");
-      localSet("isLogged", {}, 15);
     } catch (error) {
       toast.error(error.message);
     }
@@ -78,7 +82,7 @@ class Login extends Component {
                 <Row>
                   <Col>
                     <FormGroup>
-                      <Button color='primary' className='w-100'>
+                      <Button color='primary' className='w-100' onClick={this.handleSubmit.bind(this)}>
                         ENTRAR
                       </Button>
                     </FormGroup>

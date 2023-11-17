@@ -29,7 +29,7 @@ class ModalRegister extends Component {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'api-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDAyNjM0NDQsImlhdCI6MTcwMDE3NzA0NCwic3ViIjoiMDIzNzI4ZjUtNTFiYS00YjlkLTg0MGEtMzFjNGVmMzMxNWRjIn0.vgkBsneSk3FjOHyFcOebQl4o3H-2Un2kobTE-poBmYc'
+                    'api-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDAzMjEwNjcsImlhdCI6MTcwMDIzNDY2Nywic3ViIjoiMDIzNzI4ZjUtNTFiYS00YjlkLTg0MGEtMzFjNGVmMzMxNWRjIn0.7O4BfZNQzLYka4RKBhtoQSzaaQCBDlEMvHDwi9ejo5o'
                 },
                 body: JSON.stringify({
                     name: Name,
