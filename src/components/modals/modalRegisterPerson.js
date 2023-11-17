@@ -25,7 +25,7 @@ class ModalRegister extends Component {
                     name: Name,
                     cpf: CPF,
                     phone: Phone,
-                    floor: Floor
+                    floor: parseInt(Floor, 10)
                 }),
             });
 

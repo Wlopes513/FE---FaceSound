@@ -5,11 +5,12 @@ import { Button, Col, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, Mo
 class ModalRegisterUser extends Component {
     constructor(props) {
         super(props)
-        this.state = { Name: "", Email: "", Admin: "" };
+        this.state = { Name: "", Email: "", Admin: "", Password: "" };
+        this.handleRegister = this.handleRegister.bind(this);
     }
 
     async handleRegister() {
-        const { Name, Email, Admin } = this.state;
+        const { Name, Email, Admin, Password } = this.state;
         const { toggle } = this.props;
 
         try {
@@ -23,6 +24,7 @@ class ModalRegisterUser extends Component {
                     name: Name,
                     email: Email,
                     admin: Admin,
+                    password: Password
                 }),
             });
 
@@ -38,12 +40,12 @@ class ModalRegisterUser extends Component {
     };
 
 render() {
-    const { Email, Name, Admin } = this.state;
+    const { Email, Name, Admin, Password} = this.state;
     const { isOpen, toggle } = this.props;
 
     return (
         <Modal isOpen={isOpen} toggle={toggle}>
-            <ModalHeader toggle={toggle}>Informe os dados do Visitante</ModalHeader>
+            <ModalHeader toggle={toggle}>Informe os dados do usuario</ModalHeader>
             <ModalBody>
                 <Row>
                     <Col>
@@ -66,6 +68,14 @@ render() {
                         <FormGroup floating>
                             <Input value={Admin} required={true} onChange={(e) => this.setState({ Admin: e.target.value })} placeholder="Admin" id="Admin" />
                             <Label for="Admin">Admin</Label>
+                        </FormGroup>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <FormGroup floating>
+                            <Input value={Password} required={true} onChange={(e) => this.setState({ Password: e.target.value })} placeholder="Password" id="Password" />
+                            <Label for="Password">Senha</Label>
                         </FormGroup>
                     </Col>
                 </Row>
