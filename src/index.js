@@ -14,7 +14,6 @@ import Dashboard from './views/pages/dashboard';
 import People from './views/pages/people';
 import User from './views/pages/user';
 
-import 'react-toastify/dist/ReactToastify.css';
 import './assets/sass/index.scss';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
