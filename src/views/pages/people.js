@@ -6,12 +6,34 @@ import { withTranslation } from 'react-i18next';
 import { Button, Card, CardBody, Col, Row } from 'reactstrap';
 import Header from '../../containers/defaultHeader';
 import { ModalRegisterComponent } from '../../components/modals';
+import { format } from 'date-fns';
+import { localGet } from '../../utils/session';
 
 class People extends Component {
     constructor(props) {
         super(props)
-        this.state = { Width: window.innerWidth, IsOpen: false };
+        this.state = { Width: window.innerWidth, userData: [], IsOpen: false };
         this.handleModal = this.handleModal.bind(this);
+        this.fetchUserData = this.fetchUserData.bind(this);
+    }
+    componentDidMount() {
+        console.log('âddssajbsdha')
+        this.fetchUserData();
+    }
+
+    fetchUserData() {
+        const token = localGet("isLogged");
+
+        fetch('http://api.facesoundid.tech/api/v1/persons/', {
+            headers: {
+                'api-token': token
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ userData: data });
+            })
+            .catch(error => console.error('Erro ao obter dados:', error));
     }
 
     handleModal(event) {
@@ -23,7 +45,7 @@ class People extends Component {
     }
 
     render() {
-        const { IsOpen } = this.state;
+        const { IsOpen, userData } = this.state;
 
         return (
             <div className="app">
@@ -56,30 +78,38 @@ class People extends Component {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>John Doe</td>
-                                            <td>123.456.789-01</td>
-                                            <td>(11) 91234-7890</td>
-                                            <td>3°</td>
-                                            <td>2023/11/12</td>
-                                            <td>2023/11/12</td>
-                                            <td>
-                                                <button
-                                                    className="btn btn-warning btn-sm btn-visual"
-                                                    type='button'
-                                                    onClick={this.handleTest}>
-                                                    Editar
-                                                </button>
-                                                <button
-                                                    className="btn btn-danger btn-sm btn-visual"
-                                                    type='button'
-                                                    onClick={this.handleTest}>
-                                                    Excluir
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
+                                        {userData.length ? (
+                                            userData.map(user => (
+                                                <tr key={user.id}>
+                                                    <td>{user.id}</td>
+                                                    <td>{user.name}</td>
+                                                    <td>{user.cpf}</td>
+                                                    <td>{user.phone}</td>
+                                                    <td>{user.floor}</td>
+                                                    <td>{user.created_at && format(new Date(user.created_at), 'dd/MM/yyyy')}</td>
+                                                    <td>{user.updated_at && format(new Date(user.updated_at), 'dd/MM/yyyy')}</td>
+                                                    <td>
+                                                        <button
+                                                            className="btn btn-warning btn-sm btn-visual"
+                                                            type='button'
+                                                            onClick={this.handleTest}>
+                                                            Editar
+                                                        </button>
+                                                        <button
+                                                            className="btn btn-danger btn-sm btn-visual"
+                                                            type='button'
+                                                            onClick={this.handleTest}>
+                                                            Excluir
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan="7">Sem dados disponíveis</td>
+                                            </tr>
+                                        )}
+                                    </tbody>                          
                                 </table>
                             </CardBody>
                         </Card>
