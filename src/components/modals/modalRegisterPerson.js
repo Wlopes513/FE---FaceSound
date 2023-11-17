@@ -10,7 +10,9 @@ class ModalRegister extends Component {
         this.handleRegister = this.handleRegister.bind(this);
     }
 
-    async handleRegister() {
+    async handleRegister(event) {
+        event.preventDefault();
+
         const { Name, CPF, Phone, Floor } = this.state;
         const { toggle } = this.props;
 
@@ -34,7 +36,7 @@ class ModalRegister extends Component {
             }
 
             console.log('Cadastro bem-sucedido!');
-            toggle();
+            toggle(event);
         } catch (error) {
             console.error('Erro no cadastro:', error.message);
         }
