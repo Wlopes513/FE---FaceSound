@@ -27,7 +27,9 @@ class People extends Component {
 
         return (
             <div className="app">
-                <ModalRegisterComponent isOpen={IsOpen} toggle={this.handleModal} />
+                {IsOpen && (
+                    <ModalRegisterComponent isOpen={IsOpen} toggle={this.handleModal} />
+                )}
                 <CHeaderNav>
                     <Header className="header" />
                 </CHeaderNav>

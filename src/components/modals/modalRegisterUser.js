@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import { Button, Col, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row } from 'reactstrap';
 
+const initialState = {
+    Name: "",
+    Email: "",
+    Admin: "",
+    Password: ""
+}
+
 class ModalRegisterUser extends Component {
     constructor(props) {
         super(props)
@@ -35,6 +42,7 @@ class ModalRegisterUser extends Component {
             }
 
             console.log('Cadastro bem-sucedido!');
+            this.setState(initialState);
             toggle(event);
         } catch (error) {
             console.error('Erro no cadastro:', error.message);
@@ -85,7 +93,7 @@ class ModalRegisterUser extends Component {
                 <ModalFooter>
                     <Button color="primary" onClick={this.handleRegister}>
                         Cadastrar
-                    </Button>{' '}
+                    </Button>
                     <Button color="secondary" onClick={toggle}>
                         Cancelar
                     </Button>

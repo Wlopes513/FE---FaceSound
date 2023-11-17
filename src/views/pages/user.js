@@ -26,7 +26,9 @@ class User extends Component {
         const { IsOpen } = this.state;
         return (
             <div className="app">
-                <ModalRegisterUserComponent isOpen={IsOpen} toggle={this.handleModal}/>
+                {IsOpen && (
+                    <ModalRegisterUserComponent isOpen={IsOpen} toggle={this.handleModal} />
+                )}
                 <CHeaderNav>
                     <Header className="header" />
                 </CHeaderNav>
