@@ -1,9 +1,11 @@
+/* eslint-disable class-methods-use-this */
 import React, { Component } from 'react';
 import { withTranslation } from 'react-i18next';
 import {
   Button, Col, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row,
 } from 'reactstrap';
 import { toast } from 'react-toastify';
+import { localGet } from '../../utils/session';
 import ImageUpload from './imageUpload';
 
 const initialState = {
@@ -11,37 +13,18 @@ const initialState = {
   CPF: '',
   Phone: '',
   Floor: '',
+  UploadedImage: null,
 };
 
 const token = localGet('isLogged');
-
-async function uploadImage(userId, imageBase64) {
-  try {
-    const url = `http://api.facesoundid.tech/api/v1/persons/${userId}/upload-image`;
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'api-token': token,
-      },
-      body: JSON.stringify({
-        image: imageBase64,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Erro ao fazer upload da imagem: ${response.status}`);
-    }
-  } catch (error) {
-    toast.error(error.message);
-  }
-}
 
 class ModalRegister extends Component {
   constructor(props) {
     super(props);
     this.state = initialState;
     this.handleRegister = this.handleRegister.bind(this);
+    this.handleUploadImage = this.handleUploadImage.bind(this);
+    this.handleChangeImage = this.handleChangeImage.bind(this);
   }
 
   componentDidMount() {
@@ -62,11 +45,33 @@ class ModalRegister extends Component {
     }
   }
 
+  async handleUploadImage(userId, imageBase64) {
+    try {
+      const url = `http://api.facesoundid.tech/api/v1/persons/${userId}/upload-image`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'api-token': token,
+        },
+        body: JSON.stringify({
+          image: imageBase64,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Erro ao fazer upload da imagem: ${response.status}`);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
+
   async handleRegister(event) {
     event.preventDefault();
 
     const {
-      Name, CPF, Phone, Floor,
+      Name, CPF, Phone, Floor, UploadedImage,
     } = this.state;
     const { toggle, editUserId, onEditSuccess } = this.props;
 
@@ -94,9 +99,8 @@ class ModalRegister extends Component {
 
       const userData = await response.json();
 
-      if (this.imageCaptureRef && this.imageCaptureRef.hasImage()) {
-        const imageBase64 = this.imageCaptureRef.getImageData();
-        await uploadImage(userData.id, imageBase64);
+      if (UploadedImage) {
+        await uploadImage(userData.id, UploadedImage);
       }
 
       toast.success(editUserId ? 'Edição bem-sucedida!' : 'Cadastro bem-sucedido!');
@@ -105,6 +109,12 @@ class ModalRegister extends Component {
     } catch (error) {
       toast.error(error.message);
     }
+  }
+
+  handleChangeImage(event, image) {
+    event.preventDefault();
+
+    this.setState({ UploadedImage: image });
   }
 
   render() {
@@ -152,11 +162,7 @@ class ModalRegister extends Component {
               </FormGroup>
             </Col>
           </Row>
-          <ImageUpload ref={(ref) => {
-            this.imageCaptureRef = ref;
-            return null;
-          }}
-          />
+          <ImageUpload changeImage={this.handleChangeImage} />
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.handleRegister}>

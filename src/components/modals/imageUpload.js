@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import Webcam from 'react-webcam';
+import { Label } from 'reactstrap';
 
 function WebcamCapture() {
   const webcamRef = React.useRef(null);
 
-  const capture = React.useCallback(() => {
+  const capture = React.useCallback((e) => {
     const imageSrc = webcamRef.current.getScreenshot();
     setUploadedImage(imageSrc);
+    changeImage(e, imageSrc);
     setWebcamEnabled(false);
   }, [webcamRef]);
 
@@ -23,7 +25,8 @@ function WebcamCapture() {
   );
 }
 
-export default function ImageUpload() {
+export default function ImageUpload(props) {
+  const { changeImage } = props;
   const [uploadedImage, setUploadedImage] = useState(null);
   const [webcamEnabled, setWebcamEnabled] = useState(false);
 
@@ -42,7 +45,7 @@ export default function ImageUpload() {
       {!uploadedImage && !webcamEnabled && (
         <>
           <button onClick={() => setWebcamEnabled(true)} type="button">Tirar Foto</button>
-          <label htmlFor="uploadImage">Escolha uma imagem:</label>
+          <Label htmlFor="uploadImage">Escolha uma imagem:</Label>
           <input
             type="file"
             accept="image/*"
@@ -53,6 +56,7 @@ export default function ImageUpload() {
 
               reader.onload = () => {
                 setUploadedImage(reader.result);
+                changeImage(e, reader.result);
               };
 
               reader.readAsDataURL(file);
@@ -68,7 +72,7 @@ export default function ImageUpload() {
         </div>
       )}
 
-      {webcamEnabled && <WebcamCapture />}
+      {webcamEnabled && <WebcamCapture changeImage={changeImage} />}
     </div>
   );
 }
