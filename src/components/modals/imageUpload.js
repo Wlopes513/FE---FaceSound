@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import Webcam from 'react-webcam';
 import { Label } from 'reactstrap';
 
+const imageStyles = {
+  maxWidth: '100%',
+  maxHeight: '280px',
+  marginTop: '20px',
+};
+
 function WebcamCapture() {
   const webcamRef = React.useRef(null);
 
@@ -29,12 +35,6 @@ export default function ImageUpload(props) {
   const { changeImage } = props;
   const [uploadedImage, setUploadedImage] = useState(null);
   const [webcamEnabled, setWebcamEnabled] = useState(false);
-
-  const imageStyles = {
-    maxWidth: '100%',
-    maxHeight: '280px',
-    marginTop: '20px',
-  };
 
   const clearImage = () => {
     setUploadedImage(null);
