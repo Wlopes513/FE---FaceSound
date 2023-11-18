@@ -5,6 +5,10 @@
         margin-top: 4%;
         background-color: white;
         border-radius: 10px !important;
+
+        .card-body {
+            overflow-y: auto !important;
+        }
     }
 
     table {
