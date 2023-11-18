@@ -13,6 +13,30 @@ const initialState = {
   Floor: '',
 };
 
+const token = localGet('isLogged');
+
+async function uploadImage(userId, imageBase64) {
+  try {
+    const url = `http://api.facesoundid.tech/api/v1/persons/${userId}/upload-image`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-token': token,
+      },
+      body: JSON.stringify({
+        image: imageBase64,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Erro ao fazer upload da imagem: ${response.status}`);
+    }
+  } catch (error) {
+    toast.error(error.message);
+  }
+}
+
 class ModalRegister extends Component {
   constructor(props) {
     super(props);
@@ -54,7 +78,7 @@ class ModalRegister extends Component {
         method,
         headers: {
           'Content-Type': 'application/json',
-          'api-token': 'SUA_API_TOKEN_AQUI',
+          'api-token': token,
         },
         body: JSON.stringify({
           name: Name,
@@ -66,6 +90,13 @@ class ModalRegister extends Component {
 
       if (!response.ok) {
         throw new Error(`Erro na requisição: ${response.status}`);
+      }
+
+      const userData = await response.json();
+
+      if (this.imageCaptureRef && this.imageCaptureRef.hasImage()) {
+        const imageBase64 = this.imageCaptureRef.getImageData();
+        await uploadImage(userData.id, imageBase64);
       }
 
       toast.success(editUserId ? 'Edição bem-sucedida!' : 'Cadastro bem-sucedido!');
@@ -121,7 +152,11 @@ class ModalRegister extends Component {
               </FormGroup>
             </Col>
           </Row>
-          <ImageUpload />
+          <ImageUpload ref={(ref) => {
+            this.imageCaptureRef = ref;
+            return null;
+          }}
+          />
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.handleRegister}>

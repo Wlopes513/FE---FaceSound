@@ -21,6 +21,23 @@ class ModalRegisterUser extends Component {
     this.handleRegister = this.handleRegister.bind(this);
   }
 
+  componentDidMount() {
+    const { editedUser } = this.props;
+
+    if (editedUser) {
+      const {
+        name, email, admin,
+      } = editedUser;
+      this.setState({
+        Name: name || '',
+        Email: email || '',
+        Admin: admin || '',
+      });
+    } else {
+      this.setState(initialState);
+    }
+  }
+
   async handleRegister(event) {
     event.preventDefault();
 

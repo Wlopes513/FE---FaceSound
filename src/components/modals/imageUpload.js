@@ -1,9 +1,29 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/no-unstable-nested-components */
 import React, { useState } from 'react';
 import Webcam from 'react-webcam';
 
-function ImageUpload() {
+function WebcamCapture() {
+  const webcamRef = React.useRef(null);
+
+  const capture = React.useCallback(() => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    setUploadedImage(imageSrc);
+    setWebcamEnabled(false);
+  }, [webcamRef]);
+
+  return (
+    <div>
+      <Webcam
+        audio={false}
+        ref={webcamRef}
+        style={imageStyles}
+        screenshotFormat="image/jpeg"
+      />
+      <button onClick={capture} type="button">Capturar Foto</button>
+    </div>
+  );
+}
+
+export default function ImageUpload() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [webcamEnabled, setWebcamEnabled] = useState(false);
 
@@ -12,28 +32,6 @@ function ImageUpload() {
     maxHeight: '280px',
     marginTop: '20px',
   };
-
-  function WebcamCapture() {
-    const webcamRef = React.useRef(null);
-
-    const capture = React.useCallback(() => {
-      const imageSrc = webcamRef.current.getScreenshot();
-      setUploadedImage(imageSrc);
-      setWebcamEnabled(false);
-    }, [webcamRef]);
-
-    return (
-      <div>
-        <Webcam
-          audio={false}
-          ref={webcamRef}
-          style={imageStyles}
-          screenshotFormat="image/jpeg"
-        />
-        <button onClick={capture} type="button">Capturar Foto</button>
-      </div>
-    );
-  }
 
   const clearImage = () => {
     setUploadedImage(null);
@@ -44,11 +42,11 @@ function ImageUpload() {
       {!uploadedImage && !webcamEnabled && (
         <>
           <button onClick={() => setWebcamEnabled(true)} type="button">Tirar Foto</button>
-          <label htmlFor="upload">Escolha uma imagem:</label>
+          <label htmlFor="uploadImage">Escolha uma imagem:</label>
           <input
             type="file"
             accept="image/*"
-            id="upload"
+            id="uploadImage"
             onChange={(e) => {
               const file = e.target.files[0];
               const reader = new FileReader();
@@ -74,5 +72,3 @@ function ImageUpload() {
     </div>
   );
 }
-
-export default ImageUpload;
