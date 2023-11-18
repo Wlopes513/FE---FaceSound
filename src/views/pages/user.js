@@ -29,7 +29,7 @@ class User extends Component {
 
     const { IsOpen } = this.state;
 
-    this.setState({ IsOpen: !IsOpen });
+    this.setState({ IsOpen: !IsOpen, EditUserId: null });
   }
 
   handleEdit(userId) {
