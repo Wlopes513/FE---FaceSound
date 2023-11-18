@@ -47,7 +47,7 @@ class ModalRegister extends Component {
 
   async handleUploadImage(userId, imageBase64) {
     try {
-      const url = `http://api.facesoundid.tech/api/v1/persons/${userId}/upload-image`;
+      const url = `http://api.facesoundid.tech/api/v1/persons/${userId}/upload-image/`;
       const response = await fetch(url, {
         method: 'POST',
         headers: {
@@ -100,7 +100,7 @@ class ModalRegister extends Component {
       const userData = await response.json();
 
       if (UploadedImage) {
-        await uploadImage(userData.id, UploadedImage);
+        await this.handleUploadImage(userData.id, UploadedImage);
       }
 
       toast.success(editUserId ? 'Edição bem-sucedida!' : 'Cadastro bem-sucedido!');
