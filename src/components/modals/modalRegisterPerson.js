@@ -20,23 +20,21 @@ class ModalRegister extends Component {
     this.handleRegister = this.handleRegister.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidMount() {
     const { editedUser } = this.props;
 
-    if (prevProps.editedUser !== editedUser) {
-      if (editedUser) {
-        const {
-          name, cpf, phone, floor,
-        } = editedUser;
-        this.setState({
-          Name: name || '',
-          CPF: cpf || '',
-          Phone: phone || '',
-          Floor: floor || '',
-        });
-      } else {
-        this.setState(initialState);
-      }
+    if (editedUser) {
+      const {
+        name, cpf, phone, floor,
+      } = editedUser;
+      this.setState({
+        Name: name || '',
+        CPF: cpf || '',
+        Phone: phone || '',
+        Floor: floor || '',
+      });
+    } else {
+      this.setState(initialState);
     }
   }
 
