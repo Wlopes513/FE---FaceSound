@@ -26,6 +26,12 @@ input {
     color: #A0A4F1 !important;
 }
 
+td {
+    label {
+        max-width: 100px !important;
+    }
+}
+
 .font-xl {
     font-size: 1.25rem !important;
 }
