@@ -8,8 +8,8 @@ import LogoHome from '../../assets/imgs/logo-home.svg';
 
 class Home extends Component {
   constructor(props) {
-    super(props)
-    this.state = { Width: window.innerWidth };
+    super(props);
+    this.state = { };
   }
 
   render() {
@@ -19,12 +19,12 @@ class Home extends Component {
           <Header className="header" />
         </CHeaderNav>
         <div className="app-body">
-          <div className='container-centered'>
+          <div className="container-centered">
             <img src={LogoHome} alt="Logo Home" />
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

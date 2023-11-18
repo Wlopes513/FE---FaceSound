@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOM from "react-dom/client";
+import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { I18nextProvider } from 'react-i18next';
 import { ToastContainer } from 'react-toastify';
@@ -17,12 +17,12 @@ import User from './views/pages/user';
 import './assets/sass/index.scss';
 import { localGet } from './utils/session';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 
-const alreadyLogged = localGet("isLogged");
+const alreadyLogged = localGet('isLogged');
 
-if (!alreadyLogged && window.location.pathname !== "/login") {
-    window.open("/login", "_self");
+if (!alreadyLogged && window.location.pathname !== '/login') {
+  window.open('/login', '_self');
 }
 
 root.render(
@@ -41,8 +41,7 @@ root.render(
         </Routes>
       </BrowserRouter>
     </React.StrictMode>
-  </I18nextProvider>
+  </I18nextProvider>,
 );
-
 
 reportWebVitals();

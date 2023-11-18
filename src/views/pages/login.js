@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import { Container, Form, Row, Col, Input, Button, FormGroup } from 'reactstrap';
+import {
+  Container, Form, Row, Col, Input, Button, FormGroup,
+} from 'reactstrap';
 import { withTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
+import { Navigate } from 'react-router-dom';
 import Logo from '../../assets/imgs/logo.svg';
 import { localSet } from '../../utils/session';
-import { Navigate } from 'react-router-dom';
 
 class Login extends Component {
   constructor(props, context) {
-    super(props, context)
-    this.state = { Width: window.innerWidth, Email: '', Password: '', loggedIn: false };
+    super(props, context);
+    this.state = {
+      Email: '', Password: '', loggedIn: false,
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -22,27 +26,27 @@ class Login extends Component {
       await fetch('http://api.facesoundid.tech/api/v1/users/login', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           email: Email,
           password: Password,
         }),
       })
-        .then(response => {
+        .then((response) => {
           if (!response.ok) {
             throw new Error(`Erro na requisição: ${response.status}`);
           }
           return response.json();
         })
-        .then(data => {
-          localSet("isLogged", data.jwt_token, 15);
+        .then((data) => {
+          localSet('isLogged', data.jwt_token, 15);
           this.setState({ loggedIn: true });
-          toast.success("Login bem-sucedido!");
+          toast.success('Login bem-sucedido!');
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Houve um problema com a sua requisição fetch:', error);
-          toast.error("Credenciais inválidas!");
+          toast.error('Credenciais inválidas!');
         });
     } catch (error) {
       toast.error(error.message);
@@ -58,11 +62,11 @@ class Login extends Component {
 
     return (
       <div className="app-auth">
-        <Container className='flex-fill d-flex flex-column justify-content-center'>
-          <Form className='align-self-center' onSubmit={this.handleSubmit}>
-            <Row className='container-form'>
+        <Container className="flex-fill d-flex flex-column justify-content-center">
+          <Form className="align-self-center" onSubmit={this.handleSubmit}>
+            <Row className="container-form">
               <Col xs="9">
-                <div className='h-100 d-flex justify-content-center align-self-center'>
+                <div className="h-100 d-flex justify-content-center align-self-center">
                   <img src={Logo} alt="Logo Face Sound ID" />
                 </div>
               </Col>
@@ -87,7 +91,7 @@ class Login extends Component {
                 <Row>
                   <Col>
                     <FormGroup>
-                      <Button color='primary' className='w-100' type='submit'>
+                      <Button color="primary" className="w-100" type="submit">
                         ENTRAR
                       </Button>
                     </FormGroup>
@@ -97,8 +101,8 @@ class Login extends Component {
             </Row>
           </Form>
         </Container>
-      </div >
-    )
+      </div>
+    );
   }
 }
 

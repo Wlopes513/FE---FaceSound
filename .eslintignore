@@ -1,0 +1,4 @@
+tmp/*/.js
+node_modules/*/.js
+src/reportWebVitals.js
+src/index.js

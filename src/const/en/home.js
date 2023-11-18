@@ -1,5 +1,5 @@
-const HOME =  {
-    TITLE: "Hello this is my page React with Sass!",
-}
+const HOME = {
+  TITLE: 'Hello this is my page React with Sass!',
+};
 
 export default HOME;

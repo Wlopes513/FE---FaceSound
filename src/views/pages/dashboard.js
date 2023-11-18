@@ -8,8 +8,8 @@ import Header from '../../containers/defaultHeader';
 
 class Home extends Component {
   constructor(props) {
-    super(props)
-    this.state = { Width: window.innerWidth };
+    super(props);
+    this.state = {};
   }
 
   render() {
@@ -28,7 +28,7 @@ class Home extends Component {
           </Container>
         </div>
       </div>
-    )
+    );
   }
 }
 
