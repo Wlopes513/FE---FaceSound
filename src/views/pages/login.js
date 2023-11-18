@@ -44,8 +44,7 @@ class Login extends Component {
           this.setState({ loggedIn: true });
           toast.success('Login bem-sucedido!');
         })
-        .catch((error) => {
-          console.error('Houve um problema com a sua requisição fetch:', error);
+        .catch(() => {
           toast.error('Credenciais inválidas!');
         });
     } catch (error) {

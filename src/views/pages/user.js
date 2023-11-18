@@ -43,7 +43,7 @@ class User extends Component {
       .then((data) => {
         this.setState({ UserData: data });
       })
-      .catch((error) => console.error('Erro ao obter dados:', error));
+      .catch(() => toast.error('Erro ao obter dados!'));
   }
 
   render() {
