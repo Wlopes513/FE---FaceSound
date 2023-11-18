@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import {
   Button, Col, FormGroup, Input, Label, Modal, ModalBody, ModalFooter, ModalHeader, Row,
 } from 'reactstrap';
+import { localGet } from '../../utils/session';
 
 const initialState = {
   Name: '',
@@ -12,12 +13,12 @@ const initialState = {
   Password: '',
 };
 
+const token = localGet('isLogged');
+
 class ModalRegisterUser extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      Name: '', Email: '', Admin: '', Password: '',
-    };
+    this.state = initialState;
     this.handleRegister = this.handleRegister.bind(this);
   }
 
@@ -26,12 +27,13 @@ class ModalRegisterUser extends Component {
 
     if (editedUser) {
       const {
-        name, email, admin,
+        name, email, admin, password,
       } = editedUser;
       this.setState({
         Name: name || '',
         Email: email || '',
         Admin: admin || '',
+        Password: password || '',
       });
     } else {
       this.setState(initialState);
@@ -44,14 +46,17 @@ class ModalRegisterUser extends Component {
     const {
       Name, Email, Admin, Password,
     } = this.state;
-    const { toggle } = this.props;
+    const { toggle, editUserId, onEditSuccess } = this.props;
 
     try {
-      const response = await fetch('http://api.facesoundid.tech/api/v1/users/', {
-        method: 'POST',
+      const method = editUserId ? 'PUT' : 'POST';
+      const url = editUserId ? `http://api.facesoundid.tech/api/v1/users/${editUserId}` : 'http://api.facesoundid.tech/api/v1/users/';
+
+      const response = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
-          'api-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDAzMjEwNjcsImlhdCI6MTcwMDIzNDY2Nywic3ViIjoiMDIzNzI4ZjUtNTFiYS00YjlkLTg0MGEtMzFjNGVmMzMxNWRjIn0.7O4BfZNQzLYka4RKBhtoQSzaaQCBDlEMvHDwi9ejo5o',
+          'api-token': token,
         },
         body: JSON.stringify({
           name: Name,
@@ -65,9 +70,15 @@ class ModalRegisterUser extends Component {
         throw new Error(`Erro na requisição: ${response.status}`);
       }
 
-      toast.success('Cadastro bem-sucedido!');
-      this.setState(initialState);
+      const userData = await response.json();
+
+      if (UploadedImage) {
+        await this.handleUploadImage(userData.id, UploadedImage);
+      }
+
+      toast.success(editUserId ? 'Edição bem-sucedida!' : 'Cadastro bem-sucedido!');
       toggle(event);
+      onEditSuccess();
     } catch (error) {
       toast.error(error.message);
     }
@@ -77,11 +88,14 @@ class ModalRegisterUser extends Component {
     const {
       Email, Name, Admin, Password,
     } = this.state;
-    const { isOpen, toggle } = this.props;
+    const { isOpen, toggle, editedUser } = this.props;
 
     return (
       <Modal isOpen={isOpen} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Informe os dados do usuario</ModalHeader>
+        <ModalHeader toggle={toggle}>
+          {editedUser ? 'Editar ' : 'Cadastrar '}
+          Usuário
+        </ModalHeader>
         <ModalBody>
           <Row>
             <Col>
@@ -118,7 +132,7 @@ class ModalRegisterUser extends Component {
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.handleRegister}>
-            Cadastrar
+            {editedUser ? 'Salvar' : 'Cadastrar'}
           </Button>
           <Button color="secondary" onClick={toggle}>
             Cancelar
