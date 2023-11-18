@@ -25,7 +25,9 @@ class ModalRegister extends Component {
 
     if (prevProps.editedUser !== editedUser) {
       if (editedUser) {
-        const { name, cpf, phone, floor } = editedUser;
+        const {
+          name, cpf, phone, floor,
+        } = editedUser;
         this.setState({
           Name: name || '',
           CPF: cpf || '',
@@ -80,12 +82,12 @@ class ModalRegister extends Component {
     const {
       CPF, Name, Phone, Floor,
     } = this.state;
-    const { isOpen, toggle } = this.props;
+    const { isOpen, toggle, editedUser } = this.props;
 
     return (
       <Modal isOpen={isOpen} toggle={toggle}>
         <ModalHeader toggle={toggle}>
-          {this.editedUser ? 'Editar' : 'Cadastrar'}{' '}
+          {editedUser ? 'Editar ' : 'Cadastrar '}
           Visitante
         </ModalHeader>
         <ModalBody>
@@ -125,7 +127,7 @@ class ModalRegister extends Component {
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.handleRegister}>
-            {this.props.editedUser ? 'Salvar' : 'Cadastrar'}
+            {editedUser ? 'Salvar' : 'Cadastrar'}
           </Button>
           <Button color="secondary" onClick={toggle}>
             Cancelar
