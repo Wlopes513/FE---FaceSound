@@ -4,12 +4,13 @@ import {
 } from '@coreui/react';
 import { withTranslation } from 'react-i18next';
 import {
-  Button, Card, CardBody, Col, Row,
+  Button, Card, CardBody, Col, Row, Label,
 } from 'reactstrap';
 import { format } from 'date-fns';
 import Header from '../../containers/defaultHeader';
 import { ModalRegisterComponent } from '../../components/modals';
 import { localGet } from '../../utils/session';
+import { cpfMask, phoneMask } from '../../utils/mask';
 
 class People extends Component {
   constructor(props) {
@@ -97,33 +98,38 @@ class People extends Component {
                   </thead>
                   <tbody>
                     {UserData.length ? (
-                      UserData.map((user, index) => (
-                        <tr key={user.id}>
-                          <td>{index + 1}</td>
-                          <td>{user.name}</td>
-                          <td>{user.cpf}</td>
-                          <td>{user.phone}</td>
-                          <td>{user.floor}</td>
-                          <td>{user.created_at && format(new Date(user.created_at), 'dd/MM/yyyy')}</td>
-                          <td>{user.updated_at && format(new Date(user.updated_at), 'dd/MM/yyyy')}</td>
-                          <td>
-                            <button
-                              className="btn btn-warning btn-sm btn-visual"
-                              type="button"
-                              onClick={this.handleTest}
-                            >
-                              Editar
-                            </button>
-                            <button
-                              className="btn btn-danger btn-sm btn-visual"
-                              type="button"
-                              onClick={() => this.handleDelete(user.id)}
-                            >
-                              Excluir
-                            </button>
-                          </td>
-                        </tr>
-                      ))
+                      UserData.map((user, index) => {
+                        const createdAt = user.created_at && format(new Date(user.created_at), 'dd/MM/yyyy');
+                        const updatedAt = (user.updated_at && format(new Date(user.updated_at), 'dd/MM/yyyy')) || 'Usuário nunca modificado';
+
+                        return (
+                          <tr key={user.id}>
+                            <td>{index + 1}</td>
+                            <td><Label className="text-truncate" title={user.name}>{user.name}</Label></td>
+                            <td><Label className="text-truncate" title={cpfMask(user.cpf)}>{cpfMask(user.cpf)}</Label></td>
+                            <td><Label className="text-truncate" title={phoneMask(user.phone)}>{phoneMask(user.phone)}</Label></td>
+                            <td><Label className="text-truncate" title={user.floor}>{user.floor}</Label></td>
+                            <td><Label className="text-truncate" title={createdAt}>{createdAt}</Label></td>
+                            <td><Label className="text-truncate" title={updatedAt}>{updatedAt}</Label></td>
+                            <td>
+                              <button
+                                className="btn btn-warning btn-sm btn-visual"
+                                type="button"
+                                onClick={this.handleTest}
+                              >
+                                Editar
+                              </button>
+                              <button
+                                className="btn btn-danger btn-sm btn-visual"
+                                type="button"
+                                onClick={() => this.handleDelete(user.id)}
+                              >
+                                Excluir
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })
                     ) : (
                       <tr>
                         <td colSpan="7">Sem dados disponíveis</td>
