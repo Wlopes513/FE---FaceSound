@@ -31,6 +31,21 @@ class User extends Component {
     this.setState({ IsOpen: !IsOpen });
   }
 
+  handleDelete(userId) {
+    const token = localGet('isLogged');
+
+    fetch(`http://api.facesoundid.tech/api/v1/users/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'api-token': token,
+      },
+    })
+      .then(() => {
+        this.fetchUserData();
+      })
+      .catch(() => toast.error('Erro ao excluir usuário!'));
+  }
+
   fetchUserData() {
     const token = localGet('isLogged');
 
@@ -52,7 +67,7 @@ class User extends Component {
     return (
       <div className="app">
         {IsOpen && (
-        <ModalRegisterUserComponent isOpen={IsOpen} toggle={this.handleModal} />
+          <ModalRegisterUserComponent isOpen={IsOpen} toggle={this.handleModal} />
         )}
         <CHeaderNav>
           <Header className="header" />
@@ -80,9 +95,9 @@ class User extends Component {
                   </thead>
                   <tbody>
                     {UserData.length ? (
-                      UserData.map((user) => (
+                      UserData.map((user, index) => (
                         <tr key={user.id}>
-                          <td>{user.id}</td>
+                          <td>{index + 1}</td>
                           <td>{user.name}</td>
                           <td>{user.email}</td>
                           <td>{user.admin.toString()}</td>
@@ -99,7 +114,7 @@ class User extends Component {
                             <button
                               className="btn btn-danger btn-sm btn-visual"
                               type="button"
-                              onClick={this.handleTest}
+                              onClick={() => this.handleDelete(user.id)}
                             >
                               Excluir
                             </button>

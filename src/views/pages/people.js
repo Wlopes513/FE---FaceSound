@@ -17,6 +17,7 @@ class People extends Component {
     this.state = { UserData: [], IsOpen: false };
     this.handleModal = this.handleModal.bind(this);
     this.fetchUserData = this.fetchUserData.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentDidMount() {
@@ -29,6 +30,21 @@ class People extends Component {
     const { IsOpen } = this.state;
 
     this.setState({ IsOpen: !IsOpen });
+  }
+
+  handleDelete(userId) {
+    const token = localGet('isLogged');
+
+    fetch(`http://api.facesoundid.tech/api/v1/persons/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'api-token': token,
+      },
+    })
+      .then(() => {
+        this.fetchUserData();
+      })
+      .catch(() => toast.error('Erro ao excluir o visitante!'));
   }
 
   fetchUserData() {
@@ -52,7 +68,7 @@ class People extends Component {
     return (
       <div className="app">
         {IsOpen && (
-        <ModalRegisterComponent isOpen={IsOpen} toggle={this.handleModal} />
+          <ModalRegisterComponent isOpen={IsOpen} toggle={this.handleModal} />
         )}
         <CHeaderNav>
           <Header className="header" />
@@ -81,9 +97,9 @@ class People extends Component {
                   </thead>
                   <tbody>
                     {UserData.length ? (
-                      UserData.map((user) => (
+                      UserData.map((user, index) => (
                         <tr key={user.id}>
-                          <td>{user.id}</td>
+                          <td>{index + 1}</td>
                           <td>{user.name}</td>
                           <td>{user.cpf}</td>
                           <td>{user.phone}</td>
@@ -101,7 +117,7 @@ class People extends Component {
                             <button
                               className="btn btn-danger btn-sm btn-visual"
                               type="button"
-                              onClick={this.handleTest}
+                              onClick={() => this.handleDelete(user.id)}
                             >
                               Excluir
                             </button>
