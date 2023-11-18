@@ -16,10 +16,26 @@ const initialState = {
 class ModalRegister extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      Name: '', CPF: '', Phone: '', Floor: '',
-    };
+    this.state = initialState;
     this.handleRegister = this.handleRegister.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { editedUser } = this.props;
+
+    if (prevProps.editedUser !== editedUser) {
+      if (editedUser) {
+        const { name, cpf, phone, floor } = editedUser;
+        this.setState({
+          Name: name || '',
+          CPF: cpf || '',
+          Phone: phone || '',
+          Floor: floor || '',
+        });
+      } else {
+        this.setState(initialState);
+      }
+    }
   }
 
   async handleRegister(event) {
@@ -28,14 +44,17 @@ class ModalRegister extends Component {
     const {
       Name, CPF, Phone, Floor,
     } = this.state;
-    const { toggle } = this.props;
+    const { toggle, editUserId, onEditSuccess } = this.props;
 
     try {
-      const response = await fetch('http://api.facesoundid.tech/api/v1/persons/', {
-        method: 'POST',
+      const method = editUserId ? 'PUT' : 'POST';
+      const url = editUserId ? `http://api.facesoundid.tech/api/v1/persons/${editUserId}` : 'http://api.facesoundid.tech/api/v1/persons/';
+
+      const response = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
-          'api-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MDAzMjEwNjcsImlhdCI6MTcwMDIzNDY2Nywic3ViIjoiMDIzNzI4ZjUtNTFiYS00YjlkLTg0MGEtMzFjNGVmMzMxNWRjIn0.7O4BfZNQzLYka4RKBhtoQSzaaQCBDlEMvHDwi9ejo5o',
+          'api-token': 'SUA_API_TOKEN_AQUI',
         },
         body: JSON.stringify({
           name: Name,
@@ -49,9 +68,9 @@ class ModalRegister extends Component {
         throw new Error(`Erro na requisição: ${response.status}`);
       }
 
-      toast.success('Cadastro bem-sucedido!');
+      toast.success(editUserId ? 'Edição bem-sucedida!' : 'Cadastro bem-sucedido!');
       toggle(event);
-      this.setState(initialState);
+      onEditSuccess();
     } catch (error) {
       toast.error(error.message);
     }
@@ -65,7 +84,10 @@ class ModalRegister extends Component {
 
     return (
       <Modal isOpen={isOpen} toggle={toggle}>
-        <ModalHeader toggle={toggle}>Informe os dados do Visitante</ModalHeader>
+        <ModalHeader toggle={toggle}>
+          {this.editedUser ? 'Editar' : 'Cadastrar'}{' '}
+          Visitante
+        </ModalHeader>
         <ModalBody>
           <Row>
             <Col>
@@ -103,7 +125,7 @@ class ModalRegister extends Component {
         </ModalBody>
         <ModalFooter>
           <Button color="primary" onClick={this.handleRegister}>
-            Cadastrar
+            {this.props.editedUser ? 'Salvar' : 'Cadastrar'}
           </Button>
           <Button color="secondary" onClick={toggle}>
             Cancelar

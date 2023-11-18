@@ -18,6 +18,7 @@ class People extends Component {
     this.handleModal = this.handleModal.bind(this);
     this.fetchUserData = this.fetchUserData.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   componentDidMount() {
@@ -29,7 +30,11 @@ class People extends Component {
 
     const { IsOpen } = this.state;
 
-    this.setState({ IsOpen: !IsOpen });
+    this.setState({ IsOpen: !IsOpen, EditUserId: null });
+  }
+
+  handleEdit(userId) {
+    this.setState({ EditUserId: userId, IsOpen: true });
   }
 
   handleDelete(userId) {
@@ -63,12 +68,22 @@ class People extends Component {
   }
 
   render() {
-    const { IsOpen, UserData } = this.state;
+    const { IsOpen, UserData, EditUserId } = this.state;
+    const editedUser = UserData.find((user) => user.id === EditUserId);
 
     return (
       <div className="app">
         {IsOpen && (
-          <ModalRegisterComponent isOpen={IsOpen} toggle={this.handleModal} />
+          <ModalRegisterComponent
+            isOpen={IsOpen}
+            toggle={this.handleModal}
+            editUserId={EditUserId}
+            editedUser={editedUser}
+            onEditSuccess={() => {
+              this.handleModal({ preventDefault: () => { } });
+              this.fetchUserData();
+            }}
+          />
         )}
         <CHeaderNav>
           <Header className="header" />
@@ -110,7 +125,7 @@ class People extends Component {
                             <button
                               className="btn btn-warning btn-sm btn-visual"
                               type="button"
-                              onClick={this.handleTest}
+                              onClick={() => this.handleEdit(user.id)}
                             >
                               Editar
                             </button>
