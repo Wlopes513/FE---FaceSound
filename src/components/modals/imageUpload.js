@@ -7,6 +7,12 @@ function ImageUpload() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [webcamEnabled, setWebcamEnabled] = useState(false);
 
+  const imageStyles = {
+    maxWidth: '100%',
+    maxHeight: '280px',
+    marginTop: '20px',
+  };
+
   function WebcamCapture() {
     const webcamRef = React.useRef(null);
 
@@ -21,6 +27,7 @@ function ImageUpload() {
         <Webcam
           audio={false}
           ref={webcamRef}
+          style={imageStyles}
           screenshotFormat="image/jpeg"
         />
         <button onClick={capture} type="button">Capturar Foto</button>
@@ -30,12 +37,6 @@ function ImageUpload() {
 
   const clearImage = () => {
     setUploadedImage(null);
-  };
-
-  const imageStyles = {
-    maxWidth: '100%',
-    maxHeight: '280px',
-    marginTop: '20px',
   };
 
   return (
