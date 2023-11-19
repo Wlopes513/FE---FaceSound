@@ -8,7 +8,8 @@ const imageStyles = {
   marginTop: '20px',
 };
 
-function WebcamCapture() {
+function WebcamCapture(props) {
+  const { changeImage, setWebcamEnabled, setUploadedImage } = props;
   const webcamRef = React.useRef(null);
 
   const capture = React.useCallback((e) => {
@@ -73,7 +74,13 @@ export default function ImageUpload(props) {
         </div>
       )}
 
-      {webcamEnabled && <WebcamCapture changeImage={changeImage} />}
+      {webcamEnabled && (
+        <WebcamCapture
+          changeImage={changeImage}
+          setWebcamEnabled={setWebcamEnabled}
+          setUploadedImage={setUploadedImage}
+        />
+      )}
     </div>
   );
 }
