@@ -19,6 +19,10 @@ function WebcamCapture(props) {
     setWebcamEnabled(false);
   }, [webcamRef]);
 
+  const toggle = () => {
+    setWebcamEnabled(false);
+  };
+
   return (
     <div>
       <Webcam
@@ -28,7 +32,7 @@ function WebcamCapture(props) {
         screenshotFormat="image/jpeg"
       />
       <button onClick={capture} type="button">Capturar Foto</button>
-      <button type="button">Cancelar</button>
+      <button onClick={toggle} type="button">Cancelar</button>
     </div>
   );
 }
