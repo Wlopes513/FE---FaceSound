@@ -70,12 +70,6 @@ class ModalRegisterUser extends Component {
         throw new Error(`Erro na requisição: ${response.status}`);
       }
 
-      const userData = await response.json();
-
-      if (UploadedImage) {
-        await this.handleUploadImage(userData.id, UploadedImage);
-      }
-
       toast.success(editUserId ? 'Edição bem-sucedida!' : 'Cadastro bem-sucedido!');
       toggle(event);
       onEditSuccess();
