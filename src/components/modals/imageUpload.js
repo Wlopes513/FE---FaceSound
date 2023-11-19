@@ -27,6 +27,7 @@ function WebcamCapture() {
         screenshotFormat="image/jpeg"
       />
       <button onClick={capture} type="button">Capturar Foto</button>
+      <button type="button">Cancelar</button>
     </div>
   );
 }

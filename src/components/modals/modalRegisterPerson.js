@@ -45,18 +45,21 @@ class ModalRegister extends Component {
     }
   }
 
-  async handleUploadImage(userId, imageBase64) {
+  async handleUploadImage(userId, imageFile) {
     try {
-      const url = `http://api.facesoundid.tech/api/v1/persons/${userId}/upload-image/`;
+      const url = `http://api.facesoundid.tech/api/v1/persons/${userId}/face`;
+      const responseImage = await fetch(imageFile);
+      const blob = await responseImage.blob();
+
+      const formData = new FormData();
+      formData.append('image', blob, 'image.jpg');
+
       const response = await fetch(url, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           'api-token': token,
         },
-        body: JSON.stringify({
-          image: imageBase64,
-        }),
+        body: formData,
       });
 
       if (!response.ok) {
