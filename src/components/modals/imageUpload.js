@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Webcam from 'react-webcam';
 import { Label } from 'reactstrap';
 
 const imageStyles = {
@@ -8,39 +7,9 @@ const imageStyles = {
   marginTop: '20px',
 };
 
-function WebcamCapture(props) {
-  const { changeImage, setWebcamEnabled, setUploadedImage } = props;
-  const webcamRef = React.useRef(null);
-
-  const capture = React.useCallback((e) => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setUploadedImage(imageSrc);
-    changeImage(e, imageSrc);
-    setWebcamEnabled(false);
-  }, [webcamRef]);
-
-  const toggle = () => {
-    setWebcamEnabled(false);
-  };
-
-  return (
-    <div>
-      <Webcam
-        audio={false}
-        ref={webcamRef}
-        style={imageStyles}
-        screenshotFormat="image/jpeg"
-      />
-      <button onClick={capture} type="button">Capturar Foto</button>
-      <button onClick={toggle} type="button">Cancelar</button>
-    </div>
-  );
-}
-
 export default function ImageUpload(props) {
   const { changeImage } = props;
   const [uploadedImage, setUploadedImage] = useState(null);
-  const [webcamEnabled, setWebcamEnabled] = useState(false);
 
   const clearImage = () => {
     setUploadedImage(null);
@@ -48,9 +17,8 @@ export default function ImageUpload(props) {
 
   return (
     <div>
-      {!uploadedImage && !webcamEnabled && (
+      {!uploadedImage && (
         <>
-          <button onClick={() => setWebcamEnabled(true)} type="button">Tirar Foto</button>
           <Label htmlFor="uploadImage">Escolha uma imagem:</Label>
           <input
             type="file"
@@ -76,14 +44,6 @@ export default function ImageUpload(props) {
           <img src={uploadedImage} alt="Uploaded" style={imageStyles} />
           <button onClick={clearImage} type="button">Remover Imagem</button>
         </div>
-      )}
-
-      {webcamEnabled && (
-        <WebcamCapture
-          changeImage={changeImage}
-          setWebcamEnabled={setWebcamEnabled}
-          setUploadedImage={setUploadedImage}
-        />
       )}
     </div>
   );
