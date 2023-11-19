@@ -113,13 +113,29 @@ class ModalRegisterUser extends Component {
                 <legend>Admin</legend>
                 <FormGroup check>
                   <Label check>
-                    <Input type="radio" name="admin" value="true" checked={Admin === 'true'} onChange={(e) => this.setState({ Admin: e.target.value })} />
+                    <Input
+                      type="radio"
+                      name="admin"
+                      value={Admin === 'false'}
+                      checked={Admin === 'true'}
+                      onClick={(e) => {
+                        this.setState({ Admin: e.target.value });
+                      }}
+                    />
                     Sim
                   </Label>
                 </FormGroup>
                 <FormGroup check>
                   <Label check>
-                    <Input type="radio" name="admin" value="false" checked={Admin === 'false'} onChange={(e) => this.setState({ Admin: e.target.value })} />
+                    <Input
+                      type="radio"
+                      name="admin"
+                      value={Admin === 'false'}
+                      checked={Admin === 'false'}
+                      onClick={(e) => {
+                        this.setState({ Admin: e.target.value });
+                      }}
+                    />
                     Não
                   </Label>
                 </FormGroup>
