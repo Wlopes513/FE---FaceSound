@@ -116,7 +116,7 @@ class ModalRegisterUser extends Component {
                     <Input
                       type="radio"
                       name="admin"
-                      value={Admin === 'false'}
+                      value={Admin === 'True'}
                       checked={Admin === 'true'}
                       onClick={() => {
                         this.setState({ Admin: 'true' });
