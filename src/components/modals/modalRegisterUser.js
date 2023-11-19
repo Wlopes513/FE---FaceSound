@@ -118,8 +118,8 @@ class ModalRegisterUser extends Component {
                       name="admin"
                       value={Admin === 'false'}
                       checked={Admin === 'true'}
-                      onClick={(e) => {
-                        this.setState({ Admin: e.target.value });
+                      onClick={() => {
+                        this.setState({ Admin: 'true' });
                       }}
                     />
                     Sim
@@ -132,8 +132,8 @@ class ModalRegisterUser extends Component {
                       name="admin"
                       value={Admin === 'false'}
                       checked={Admin === 'false'}
-                      onClick={(e) => {
-                        this.setState({ Admin: e.target.value });
+                      onClick={() => {
+                        this.setState({ Admin: 'false' });
                       }}
                     />
                     Não
