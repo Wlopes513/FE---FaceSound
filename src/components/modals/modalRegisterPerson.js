@@ -152,8 +152,13 @@ class ModalRegister extends Component {
           <Row>
             <Col>
               <FormGroup floating>
-                <Input value={Floor} required onChange={(e) => this.setState({ Floor: e.target.value })} placeholder="Floor" id="Floor" />
-                <Label for="Floor">Andar°</Label>
+                <Input type="select" value={Floor} required onChange={(e) => this.setState({ Floor: e.target.value })} id="Floor">
+                  <option value="" disabled>Selecione o Andar</option>
+                  <option value="1">1° Andar</option>
+                  <option value="2">2° Andar</option>
+                  <option value="3">3° Andar</option>
+                </Input>
+                <Label for="Floor">Andar</Label>
               </FormGroup>
             </Col>
           </Row>
