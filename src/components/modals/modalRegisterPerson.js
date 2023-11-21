@@ -130,7 +130,7 @@ class ModalRegister extends Component {
       <Modal isOpen={isOpen} toggle={toggle}>
         <ModalHeader toggle={toggle}>
           {editedUser ? 'Editar ' : 'Cadastrar '}
-          Visitante
+          Pessoa
         </ModalHeader>
         <ModalBody>
           <Row>
